@@ -68,7 +68,29 @@
                 .attr("d", line)
                 .style("stroke", "red");
 
-  }
+            //  Add labels, font sizes, and chart label
+            svg.append("text")
+                .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 20) + ")")
+                .style("text-anchor", "middle")
+                .text("Time");
+
+            svg.append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 0 - margin.left)
+                .attr("x", 0 - (height / 2))
+                .attr("dy", "1em")
+                .style("text-anchor", "middle")
+                .text("Interpolated CO2");
+
+            svg.append("text")
+                .attr("x", (width / 2))
+                .attr("y", height + margin.bottom)
+                .attr("text-anchor", "middle")
+                .style("font-size", "18px")
+                .text("CO2 Levels Over Time");
+
+
+        }
     </script>
 </body>
 
