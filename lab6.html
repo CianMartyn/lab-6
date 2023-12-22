@@ -89,7 +89,17 @@
                 .style("font-size", "18px")
                 .text("CO2 Levels Over Time");
 
+            // Add an extra line for the trend data
+            var trendLine = d3.line()
+                .x(function (d) { return x(parseTime(d.Date)); })
+                .y(function (d) { return y(d.Trend); });
 
+            svg.append("path")
+                .data([data])
+                .attr("fill", "none")
+                .attr("class", "trend-line")
+                .attr("d", trendLine)
+                .style("stroke", "blue");
         }
     </script>
 </body>
