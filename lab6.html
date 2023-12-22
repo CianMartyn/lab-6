@@ -40,8 +40,35 @@
                 .x(function (d) { return x(parseTime(d.Date)); })
                 .y(function (d) { return y(d.Interpolated); });
 
+            // Append an SVG element
+            var svg = d3.select("body")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        }
+            // Add axes and line
+            x.domain(d3.extent(data, function (d) { return parseTime(d.Date); }));
+            y.domain([d3.min(data, function (d) { return d.Interpolated; }), d3.max(data, function (d) { return d.Interpolated; })]);
+
+            svg.append("g")
+                .attr("class", "x-axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis);
+
+            svg.append("g")
+                .attr("class", "y-axis")
+                .call(yAxis);
+
+            svg.append("path")
+                .data([data])
+                .attr("class", "line")
+                .attr("fill", "none")
+                .attr("d", line)
+                .style("stroke", "red");
+
+  }
     </script>
 </body>
 
